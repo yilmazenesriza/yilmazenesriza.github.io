@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>ENES RIZA YILMAZ</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --panel: #fff;
+        --ink: #0b1622;
+        --muted: #506274;
+        --line: #d5dfea;
+        --c1: #0891b2;
+        --c2: #7c3aed;
+        --hi: #f59e0b;
+        --glow: rgba(124, 58, 237, 0.18);
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #070d14;
+          --panel: #0f1b27;
+          --ink: #eaf2f8;
+          --muted: #93a8ba;
+          --line: #1d3042;
+          --c1: #22d3ee;
+          --c2: #a78bfa;
+          --hi: #fbbf24;
+          --glow: rgba(34, 211, 238, 0.16);
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #070d14;
+        --panel: #0f1b27;
+        --ink: #eaf2f8;
+        --muted: #93a8ba;
+        --line: #1d3042;
+        --c1: #22d3ee;
+        --c2: #a78bfa;
+        --hi: #fbbf24;
+        --glow: rgba(34, 211, 238, 0.16);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: calc(70px + env(safe-area-inset-top, 0px));
+        height: auto;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          17px/1.65 system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        overflow-x: hidden;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.12;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+      a {
+        color: var(--c1);
+      }
+      :focus-visible {
+        outline: 3px solid var(--hi);
+        outline-offset: 3px;
+      }
+      .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0 0 auto;
+        height: env(safe-area-inset-top, 0px);
+        background: var(--bg);
+        z-index: 60;
+      }
+      header {
+        position: sticky;
+        top: env(safe-area-inset-top, 0px);
+        z-index: 50;
+        background: color-mix(in srgb, var(--bg) 85%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--line);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 62px;
+        gap: 12px;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 1.15rem;
+        text-decoration: none;
+        color: var(--ink);
+        letter-spacing: -0.03em;
+      }
+      .logo b {
+        background: linear-gradient(90deg, var(--c1), var(--c2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      nav ul {
+        display: flex;
+        gap: 18px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      nav ul a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 15px;
+        white-space: nowrap;
+      }
+      nav ul a:hover {
+        color: var(--ink);
+      }
+      #theme {
+        background: none;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        flex: none;
+      }
+      .hero {
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+      }
+      #bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          60% 70% at 20% 30%,
+          var(--glow),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero .wrap {
+        position: relative;
+        z-index: 2;
+        padding-top: 84px;
+        padding-bottom: 72px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 6px 14px;
+        border-radius: 99px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .badge i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 0 0 #22c55e;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        70% {
+          box-shadow: 0 0 0 9px transparent;
+        }
+        100% {
+          box-shadow: 0 0 0 0 transparent;
+        }
+      }
+      .hero h1 {
+        font-size: clamp(2.8rem, 10vw, 6rem);
+        margin: 22px 0 14px;
+        font-weight: 800;
+      }
+      .grad {
+        background: linear-gradient(95deg, var(--c1), var(--c2) 55%, var(--hi));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .type {
+        font-size: clamp(1.15rem, 3.4vw, 1.7rem);
+        font-weight: 600;
+        min-height: 2.2em;
+      }
+      .type::after {
+        content: "";
+        display: inline-block;
+        width: 3px;
+        height: 1.1em;
+        background: var(--hi);
+        margin-left: 4px;
+        vertical-align: -0.15em;
+        animation: blink 1s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      .lead {
+        color: var(--muted);
+        max-width: 56ch;
+        margin: 6px 0 0;
+      }
+      .btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+      .btn {
+        display: inline-block;
+        padding: 14px 26px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 700;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .btn.p {
+        background: linear-gradient(95deg, var(--c1), var(--c2));
+        border: 0;
+        color: #fff;
+        box-shadow: 0 8px 28px var(--glow);
+      }
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+
+      section {
+        padding: 72px 0;
+      }
+      h2 {
+        font-size: clamp(1.9rem, 5vw, 2.8rem);
+        margin-bottom: 32px;
+        font-weight: 800;
+      }
+      .about {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: 1.3fr 1fr;
+        align-items: start;
+      }
+      .about p {
+        margin: 0 0 14px;
+        color: var(--muted);
+      }
+      .about p:first-child {
+        color: var(--ink);
+        font-size: 1.15rem;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px;
+      }
+      .card h3 {
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+      }
+      .card ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 9px;
+        color: var(--muted);
+      }
+      .card li::before {
+        content: "▹";
+        color: var(--c1);
+        margin-right: 8px;
+      }
+      .tl {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 28px;
+        border-left: 2px solid var(--line);
+      }
+      .tl li {
+        position: relative;
+        margin-bottom: 24px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 22px 24px;
+        transition:
+          transform 0.25s,
+          border-color 0.25s;
+      }
+      .tl li:hover {
+        transform: translateX(6px);
+        border-color: var(--c1);
+      }
+
+      .tl li::before {
+        content: "";
+        position: absolute;
+        left: -37px;
+        top: 28px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--c1), var(--c2));
+        box-shadow: 0 0 0 5px var(--bg);
+      }
+      .tl h3 {
+        font-size: 1.3rem;
+      }
+      .tl .meta {
+        color: var(--c1);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin: 4px 0 10px;
+      }
+      .tl p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 16px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chips span {
+        font-size: 0.86rem;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 99px;
+        background: color-mix(in srgb, var(--c1) 12%, transparent);
+        border: 1px solid color-mix(in srgb, var(--c1) 35%, transparent);
+      }
+      .proj {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+        gap: 18px;
+      }
+      .proj article {
+        position: relative;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 26px;
+        overflow: hidden;
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+      }
+      .proj article::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 4px;
+        background: linear-gradient(90deg, var(--c1), var(--c2), var(--hi));
+      }
+
+      .proj article:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 44px var(--glow);
+      }
+      .proj h3 {
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+      }
+      .proj .meta {
+        color: var(--c1);
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .proj p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .contact {
+        text-align: center;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 56px 24px;
+        background: radial-gradient(
+          70% 90% at 50% 0,
+          var(--glow),
+          var(--panel)
+        );
+      }
+      .contact p {
+        color: var(--muted);
+        max-width: 46ch;
+        margin: 0 auto 24px;
+      }
+      .contact .btns {
+        justify-content: center;
+      }
+      .rv {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .rv.in {
+        opacity: 1;
+        transform: none;
+      }
+      footer {
+        padding: 28px 0;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      @media (max-width: 760px) {
+        .about {
+          grid-template-columns: 1fr;
+        }
+        section {
+          padding: 52px 0;
+        }
+        .hero .wrap {
+          padding-top: 52px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+        .rv {
+          opacity: 1;
+          transform: none;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <nav>
+          <a class="logo" href="#top">E<b>RY</b></a>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <button id="theme" aria-label="Toggle light and dark theme">◐</button>
+        </nav>
+      </div>
+    </header>
+    <main id="top">
+      <div class="hero">
+        <canvas id="bg" aria-hidden="true"></canvas>
+        <div class="wrap">
+          <span class="badge"><i></i>Open to new opportunities</span>
+          <h1>ENES RIZA<br /><span class="grad">YILMAZ</span></h1>
+          <div
+            class="type"
+            id="type"
+            aria-label="Full Stack Developer and Electrical and Electronics Engineer"
+          ></div>
+          <p class="lead">
+            Full Stack Developer with nearly 3 years of experience building
+            scalable, high-availability web applications for healthcare. I cover
+            the full cycle: Back-End and Front-End Development, database
+            optimization and system integrations.
+          </p>
+          <div class="btns">
+            <a class="btn p" href="ENES_RIZA_YILMAZ.pdf" download>Download CV</a
+            ><a class="btn" href="#projects">See my work</a
+            ><a class="btn" href="#contact">Contact me</a>
+          </div>
+        </div>
+      </div>
+
+      <section id="about">
+        <div class="wrap">
+          <h2 class="rv">About me</h2>
+          <div class="about rv">
+            <div>
+              <p>
+                I’m a Full Stack Developer with a background in electrical and
+                electronics engineering, which gave me strong analytical
+                thinking, problem-solving and algorithmic skills. I enjoy
+                breaking complex problems into clear steps and turning them into
+                reliable, maintainable solutions.
+              </p>
+              <p>
+                At SISOFT I worked across the full software development
+                lifecycle on web-based Hospital Information Systems, from
+                requirement analysis and development to rapid bug fixing and
+                continuous improvements. I built user-friendly interfaces,
+                optimized complex Oracle queries and delivered API integrations
+                with careful data mapping and error handling.
+              </p>
+              <p>
+                Beyond day-to-day development, I served as on-site HIS
+                supervisor during a hospital deployment in Sudan and led the
+                integration of the national MHRS appointment system into our
+                platform.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Quick facts</h3>
+              <ul>
+                <li>
+                  BS, Electrical &amp; Electronics Eng., Kırıkkale University
+                  (2021)
+                </li>
+                <li>Based in Istanbul, Turkey</li>
+                <li>Military service completed</li>
+                <li>Driving licence: B</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="wrap">
+          <h2 class="rv">Experience</h2>
+          <ul class="tl">
+            <li class="rv">
+              <h3>Reserve Officer, Construction Department</h3>
+              <p class="meta">
+                Turkish Armed Forces, Kırklareli · Aug 2025 – Aug 2026
+              </p>
+              <p>
+                Ran on-site technical inspections and site surveys for
+                electrical and infrastructure projects, wrote technical
+                specifications, managed tender documents and helped review and
+                finalize electrical engineering drawings.
+              </p>
+            </li>
+            <li class="rv">
+              <h3>Full Stack Developer, R&amp;D</h3>
+              <p class="meta">
+                SISOFT Healthcare Information Systems, Ankara · Dec 2022 – Aug
+                2025
+              </p>
+              <p>
+                Built and maintained scalable Front-End and Back-End components
+                for Hospital Information System platforms. Optimized complex SQL
+                on Oracle, administered Linux-based environments, delivered
+                robust API integrations and took part in the full software
+                development lifecycle, from requirement analysis to rapid bug
+                fixing.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="wrap">
+          <h2 class="rv">Skills</h2>
+          <div class="skills">
+            <div class="card rv">
+              <h3>Back-End Development</h3>
+              <div class="chips">
+                <span>Java</span><span>Spring Boot</span
+                ><span>Spring Cloud</span><span>Spring Data</span
+                ><span>Spring Security</span><span>Spring MVC</span
+                ><span>Hibernate</span>
+              </div>
+            </div>
+            <div class="card rv">
+              <h3>Databases &amp; Data Management</h3>
+              <div class="chips">
+                <span>Oracle</span><span>PostgreSQL</span><span>MySQL</span
+                ><span>Elasticsearch</span>
+              </div>
+            </div>
+            <div class="card rv">
+              <h3>Front-End Development</h3>
+              <div class="chips">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span
+                ><span>Bootstrap</span><span>React</span>
+              </div>
+            </div>
+            <div class="card rv">
+              <h3>DevOps</h3>
+              <div class="chips"><span>Git</span><span>Docker</span></div>
+            </div>
+            <div class="card rv">
+              <h3>Tools &amp; Systems</h3>
+              <div class="chips">
+                <span>Linux</span><span>Apache Tomcat</span
+                ><span>Toad for Oracle</span><span>JUnit 5</span
+                ><span>Gradle</span><span>Maven</span><span>ClearCase</span
+                ><span>ClearQuest</span>
+              </div>
+            </div>
+            <div class="card rv">
+              <h3>AI Tools</h3>
+              <div class="chips"><span>Claude</span><span>Cursor</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="wrap">
+          <h2 class="rv">Key projects</h2>
+          <div class="proj">
+            <article class="rv">
+              <h3>Nyala Hospital HIS deployment</h3>
+              <p class="meta">SISOFT · Nyala, Sudan</p>
+              <p>
+                Served as on-site HIS supervisor for 3 months at the Nyala
+                Sudan-Turkey Training and Research Hospital. Directed deployment
+                tracking, gave real-time technical leadership and resolved
+                complex user and system requirements.
+              </p>
+            </article>
+            <article class="rv">
+              <h3>MHRS appointment system integration</h3>
+              <p class="meta">SISOFT · Ankara, Turkey</p>
+              <p>
+                Led the end-to-end integration of the national Central Physician
+                Appointment System web services into the core HIS, with
+                intuitive interfaces and robust HTTP methods for real-time
+                booking by staff and patients.
+              </p>
+            </article>
+            <article class="rv">
+              <h3>Military electrical infrastructure planning</h3>
+              <p class="meta">Turkish Armed Forces · Kırklareli, Turkey</p>
+              <p>
+                Managed technical documentation and review cycles for base-level
+                electrical upgrades, making sure drawings and tender documents
+                met strict engineering standards.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="wrap">
+          <div class="contact rv">
+            <h2>Let’s build something together</h2>
+            <p>I’m happy to talk about Full Stack Developer role.</p>
+            <div class="btns">
+              <a class="btn p" href="mailto:yilmazenesriza@gmail.com"
+                >Email me</a
+              >
+              <a
+                class="btn"
+                href="https://www.linkedin.com/in/enesrizayilmaz"
+                target="_blank"
+                rel="noopener"
+                >LinkedIn</a
+              >
+              <a
+                class="btn"
+                href="https://github.com/yilmazenesriza"
+                target="_blank"
+                rel="noopener"
+                >GitHub</a
+              >
+              <a class="btn" href="ENES_RIZA_YILMAZ.pdf" download
+                >Download CV</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>© 2026 Enes Rıza Yılmaz</footer>
+    <script>
+      (function () {
+        var root = document.documentElement,
+          btn = document.getElementById("theme");
+        btn.onclick = function () {
+          var d =
+            getComputedStyle(root).getPropertyValue("--bg").trim() ===
+            "#070d14";
+          root.setAttribute("data-theme", d ? "light" : "dark");
+        };
+        var reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+        /* typing */
+        var words = [
+            "Full Stack Developer",
+            "Electrical & Electronics Engineer",
+          ],
+          t = document.getElementById("type"),
+          wi = 0,
+          ci = 0,
+          del = false;
+        function tick() {
+          var w = words[wi];
+          t.textContent = w.slice(0, ci);
+          if (!del && ci === w.length) {
+            del = true;
+            return setTimeout(tick, 1500);
+          }
+          if (del && ci === 0) {
+            del = false;
+            wi = (wi + 1) % words.length;
+          }
+          ci += del ? -1 : 1;
+          setTimeout(tick, del ? 35 : 70);
+        }
+        if (reduce) {
+          t.textContent = words[0];
+        } else {
+          tick();
+        }
+        /* reveal + counters */
+        var io = new IntersectionObserver(
+          function (es) {
+            es.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+        document.querySelectorAll(".rv").forEach(function (el) {
+          io.observe(el);
+        });
+        document.querySelectorAll("[data-n]").forEach(function (el) {
+          var n = +el.dataset.n;
+          if (reduce) {
+            el.textContent = n;
+            return;
+          }
+          var s = null;
+          function f(ts) {
+            s = s || ts;
+            var p = Math.min((ts - s) / 1400, 1);
+            el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(f);
+          }
+          requestAnimationFrame(f);
+        });
+        /* network background */
+        var c = document.getElementById("bg"),
+          x = c.getContext("2d"),
+          P = [],
+          W,
+          H;
+        function size() {
+          var r = c.getBoundingClientRect();
+          W = c.width = r.width;
+          H = c.height = r.height;
+          P = [];
+          var n = Math.min(70, Math.floor((W * H) / 14000));
+          for (var i = 0; i < n; i++)
+            P.push({
+              x: Math.random() * W,
+              y: Math.random() * H,
+              vx: (Math.random() - 0.5) * 0.35,
+              vy: (Math.random() - 0.5) * 0.35,
+            });
+        }
+        function draw() {
+          var cs = getComputedStyle(root),
+            a = cs.getPropertyValue("--c1").trim() || "#22d3ee";
+          x.clearRect(0, 0, W, H);
+          x.fillStyle = a;
+          x.strokeStyle = a;
+          for (var i = 0; i < P.length; i++) {
+            var p = P[i];
+            if (!reduce) {
+              p.x += p.vx;
+              p.y += p.vy;
+              if (p.x < 0 || p.x > W) p.vx *= -1;
+              if (p.y < 0 || p.y > H) p.vy *= -1;
+            }
+            x.globalAlpha = 0.7;
+            x.beginPath();
+            x.arc(p.x, p.y, 1.8, 0, 6.3);
+            x.fill();
+            for (var j = i + 1; j < P.length; j++) {
+              var q = P[j],
+                d = Math.hypot(p.x - q.x, p.y - q.y);
+              if (d < 130) {
+                x.globalAlpha = (1 - d / 130) * 0.35;
+                x.lineWidth = 1;
+                x.beginPath();
+                x.moveTo(p.x, p.y);
+                x.lineTo(q.x, q.y);
+                x.stroke();
+              }
+            }
+          }
+          if (!reduce) requestAnimationFrame(draw);
+        }
+        size();
+        draw();
+        addEventListener("resize", function () {
+          size();
+          if (reduce) draw();
+        });
+      })();
+    </script>
+  </body>
+</html>
